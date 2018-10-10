@@ -1,0 +1,15 @@
+.home {
+
+    &__cta {
+        margin-bottom: 40px;
+    }
+}
+
+.book__cover {
+    width: 50vmin;
+    position: relative;
+    margin: 0 auto;
+    > img {
+        object-fit: cover;
+    }
+}

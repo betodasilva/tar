@@ -1,0 +1,25 @@
+body {
+    background: linear-gradient(45deg, #b92b27, #1565C0);
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.header {
+    padding: 5vmin 1rem;
+    flex: 1 0 100%;
+
+    .title, .subtitle {
+        text-align: center;
+    }
+
+    title {
+        font-size: calc(22px + (32 - 22) * ((100vw - 300px) / (1600 - 300)));
+    }
+}
+
+.page-content {
+    max-width: 860px;
+    margin: 0 auto;
+}

@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<div class="page">
+    {{ content }}
+</div>
+
+<div class="book__pagination columns">
+    <div class="column">
+        <a class="button is-fullwidth" href="{{page.previous.url}}" {% unless page.previous.url %} disabled {% endunless %}>&laquo; Previous page </a>
+    </div>
+    <div class="column">
+        <a class="button is-fullwidth" href="{{page.next.url}}" {% unless page.next.url %} disabled {% endunless %}>Next page &raquo;</a>
+    </div>
+</div>
