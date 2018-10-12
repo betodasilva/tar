@@ -21,7 +21,7 @@ function () {
   _createClass(Controller, [{
     key: "setEvents",
     value: function setEvents() {
-      this.dom.form.addEventListener('submit', this.submitForm.bind(this));
+      if (this.dom.form) this.dom.form.addEventListener('submit', this.submitForm.bind(this));
     }
   }, {
     key: "submitForm",

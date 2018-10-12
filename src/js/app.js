@@ -8,7 +8,7 @@ class Controller {
     }
 
     setEvents(){
-        this.dom.form.addEventListener('submit', this.submitForm.bind(this));
+        if ( this.dom.form ) this.dom.form.addEventListener('submit', this.submitForm.bind(this));
     }
 
     submitForm( event ){
