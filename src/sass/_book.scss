@@ -13,7 +13,7 @@
         font-size: remsize(22);
         line-height: 1.25;
         &::first-letter {
-            margin-left: 30px;
+            :not(.has-text-centered) & { margin-left: 30px; }
         }
 
         &.chapter__first-p::first-letter {
