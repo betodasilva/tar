@@ -3,8 +3,73 @@
     font-family: serif;
     padding: 8%;
     margin: 0 0 20px;
-    width: 860px;
+    width: 100%;
+    max-width: 780px;
     min-height: 600px;
+    font-family: 'EB Garamond', serif;
+
+    p {
+        margin-bottom: 20px;
+        font-size: remsize(22);
+        line-height: 1.25;
+        &::first-letter {
+            margin-left: 30px;
+        }
+
+        &.chapter__first-p::first-letter {
+            font-size: 210%;
+            margin-top: -5px;
+            margin-left: 0px;
+            font-weight: 600;
+            float: left;
+            padding-right: 3px;
+        }
+    }
+
+    h3 {
+        font-size: remsize(28);
+        font-variant: small-caps;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+
+    h4 {
+        font-weight: 600;
+        font-size: remsize(22);
+        margin-bottom: 12px;
+    }
+
+    blockquote {
+        &:not(.has-text-centered) { margin-left: 40px; }
+        > p::first-letter { margin-left: 0; }
+    }
+
+    .chapter__subtitle {
+        font-size: remsize(34);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .chapter__header {
+        margin-bottom: 60px;
+    }
+
+    .chapter__number {
+        font-size: remsize(16);
+        text-align: center;
+    }
+
+    p.page__topic {
+        text-align: center;
+        letter-spacing: 1px;
+        color: $grey-darker;
+        font-size: remsize(14);
+        text-transform: uppercase;
+        font-family: $family-sans-serif;
+    }
+
 }
 
 .book__pagination {
@@ -18,3 +83,30 @@
 // h1:first-letter {
 //     margin-left: -10px
 // }
+
+ul.no-dots {
+    list-style: none;
+}
+
+
+.page--cover {
+    text-align: center;
+    min-height: 780px; 
+    padding-top: 120px;
+    h1 {
+        font-size: remsize(72);
+        line-height: 1.125;
+        font-weight: 600;
+    }
+
+    h2 {
+        font-size: remsize(48);
+        line-height: 1.125;
+        font-style: italic;
+        margin-top: 40px;
+    }
+
+    h3 {
+        margin-top: 120px;
+    }
+}

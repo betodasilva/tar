@@ -1,4 +1,5 @@
 /*! bulma.io v0.7.1 | MIT License | github.com/jgthms/bulma */
+@import url("https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,600,600i,700,700i|Libre+Baskerville");
 @keyframes spinAround {
   from {
     transform: rotate(0deg); }
@@ -271,7 +272,7 @@ pre {
   font-family: monospace; }
 
 body {
-  color: #4a4a4a;
+  color: #000;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5; }
@@ -321,7 +322,7 @@ strong {
 pre {
   -webkit-overflow-scrolling: touch;
   background-color: whitesmoke;
-  color: #4a4a4a;
+  color: #000;
   font-size: 0.875em;
   overflow-x: auto;
   padding: 1.25rem 1.5rem;
@@ -1085,7 +1086,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   background-color: white;
   border-radius: 6px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-  color: #4a4a4a;
+  color: #000;
   display: block;
   padding: 1.25rem; }
 
@@ -1136,7 +1137,7 @@ a.box:active {
   .button.is-text {
     background-color: transparent;
     border-color: transparent;
-    color: #4a4a4a;
+    color: #000;
     text-decoration: underline; }
     .button.is-text:hover, .button.is-text.is-hovered, .button.is-text:focus, .button.is-text.is-focused {
       background-color: whitesmoke;
@@ -3026,11 +3027,11 @@ a.box:active {
   .progress::-webkit-progress-bar {
     background-color: #dbdbdb; }
   .progress::-webkit-progress-value {
-    background-color: #4a4a4a; }
+    background-color: #000; }
   .progress::-moz-progress-bar {
-    background-color: #4a4a4a; }
+    background-color: #000; }
   .progress::-ms-fill {
-    background-color: #4a4a4a;
+    background-color: #000;
     border: none; }
   .progress.is-white::-webkit-progress-value {
     background-color: white; }
@@ -3256,7 +3257,7 @@ a.box:active {
   align-items: center;
   background-color: whitesmoke;
   border-radius: 4px;
-  color: #4a4a4a;
+  color: #000;
   display: inline-flex;
   font-size: 0.75rem;
   height: 2em;
@@ -3498,7 +3499,7 @@ a.tag:hover {
 .card {
   background-color: white;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-  color: #4a4a4a;
+  color: #000;
   max-width: 100%;
   position: relative; }
 
@@ -3736,7 +3737,7 @@ a.dropdown-item {
   line-height: 1.25; }
   .menu-list a {
     border-radius: 2px;
-    color: #4a4a4a;
+    color: #000;
     display: block;
     padding: 0.5em 0.75em; }
     .menu-list a:hover {
@@ -3858,7 +3859,7 @@ a.dropdown-item {
 
 .message-header {
   align-items: center;
-  background-color: #4a4a4a;
+  background-color: #000;
   border-radius: 4px 4px 0 0;
   color: #fff;
   display: flex;
@@ -3881,7 +3882,7 @@ a.dropdown-item {
   border-radius: 4px;
   border-style: solid;
   border-width: 0 0 0 4px;
-  color: #4a4a4a;
+  color: #000;
   padding: 1.25em 1.5em; }
   .message-body code,
   .message-body pre {
@@ -4840,7 +4841,7 @@ a.navbar-item,
       color: #363636; }
 
 .panel-list a {
-  color: #4a4a4a; }
+  color: #000; }
   .panel-list a:hover {
     color: #3273dc; }
 
@@ -4899,7 +4900,7 @@ label.panel-block {
     border-bottom-color: #dbdbdb;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    color: #4a4a4a;
+    color: #000;
     display: flex;
     justify-content: center;
     margin-bottom: -1px;
@@ -6420,11 +6421,15 @@ label.panel-block {
   padding: 3rem 1.5rem 6rem; }
 
 body {
-  background: linear-gradient(45deg, #b92b27, #1565C0);
+  background-image: url("../images/lost_art_bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: linear-gradient(45deg, #b92b27, #1565C0);
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  align-items: center; }
+  align-items: center;
+  font-size: 16px; }
 
 .header {
   padding: 5vmin 1rem;
@@ -6435,7 +6440,8 @@ body {
     font-size: calc(22px + (32 - 22) * ((100vw - 300px) / (1600 - 300))); }
 
 .page-content {
-  max-width: 860px;
+  max-width: 780px;
+  width: 100%;
   margin: 0 auto; }
 
 .page {
@@ -6443,13 +6449,78 @@ body {
   font-family: serif;
   padding: 8%;
   margin: 0 0 20px;
-  width: 860px;
-  min-height: 600px; }
+  width: 100%;
+  max-width: 780px;
+  min-height: 600px;
+  font-family: 'EB Garamond', serif; }
+  .page p {
+    margin-bottom: 20px;
+    font-size: 1.375rem;
+    line-height: 1.25; }
+    .page p::first-letter {
+      margin-left: 30px; }
+    .page p.chapter__first-p::first-letter {
+      font-size: 210%;
+      margin-top: -5px;
+      margin-left: 0px;
+      font-weight: 600;
+      float: left;
+      padding-right: 3px; }
+  .page h3 {
+    font-size: 1.75rem;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    margin-top: 30px; }
+  .page h4 {
+    font-weight: 600;
+    font-size: 1.375rem;
+    margin-bottom: 12px; }
+  .page blockquote:not(.has-text-centered) {
+    margin-left: 40px; }
+  .page blockquote > p::first-letter {
+    margin-left: 0; }
+  .page .chapter__subtitle {
+    font-size: 2.125rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px; }
+  .page .chapter__header {
+    margin-bottom: 60px; }
+  .page .chapter__number {
+    font-size: 1rem;
+    text-align: center; }
+  .page p.page__topic {
+    text-align: center;
+    letter-spacing: 1px;
+    color: #363636;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 
 .book__pagination {
   margin-bottom: 0 !important; }
   .book__pagination a[disabled] {
     pointer-events: none; }
+
+ul.no-dots {
+  list-style: none; }
+
+.page--cover {
+  text-align: center;
+  min-height: 780px;
+  padding-top: 120px; }
+  .page--cover h1 {
+    font-size: 4.5rem;
+    line-height: 1.125;
+    font-weight: 600; }
+  .page--cover h2 {
+    font-size: 3rem;
+    line-height: 1.125;
+    font-style: italic;
+    margin-top: 40px; }
+  .page--cover h3 {
+    margin-top: 120px; }
 
 .home__cta {
   margin-bottom: 40px; }
