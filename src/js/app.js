@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 class Controller {
     constructor(){
         this.dom = {
@@ -8,13 +9,23 @@ class Controller {
     }
 
     setEvents(){
-        if ( this.dom.form ) this.dom.form.addEventListener('submit', this.submitForm.bind(this));
+        if ( this.dom.form ) { 
+            console.log( 'Event added for form' );
+            this.dom.form.addEventListener('submit', this.submitForm.bind(this));
+        };
     }
 
     submitForm( event ){
         event.preventDefault();
-        alert('Nothing happens for now :) \nYou gonna see page one');
-        window.location.href="/book/page-01"
+        let form = event.target;
+        let data = new FormData( form );
+        swal({
+            type: "success",
+            titleText: "Thank you for being interested. Click OK to start reading",
+            onClose: () => {
+                window.location.href="/book/page-01";
+            }
+        });
     }
 }
 

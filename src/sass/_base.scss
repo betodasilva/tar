@@ -43,6 +43,12 @@ body {
     }
 }
 
+.field.is-grouped.is-grouped-centered {
+    @media (max-width: 568px) {
+        flex-direction: column;
+    }
+}
+
 @function remsize( $size: 12, $rem: 16, $unit: rem ){
     @return #{($size/$rem)}#{$unit};
 }

@@ -6,7 +6,10 @@
 }
 
 .book__cover {
-    width: 50vmin;
+    @media ( min-width: 768px ){
+        width: 50vmin;
+    }
+    
     position: relative;
     margin: 0 auto;
     > img {

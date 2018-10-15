@@ -6455,6 +6455,10 @@ body {
       margin: 0 auto;
       width: 100%; } }
 
+@media (max-width: 568px) {
+  .field.is-grouped.is-grouped-centered {
+    flex-direction: column; } }
+
 .page {
   background: #fff;
   font-family: serif;
@@ -6552,9 +6556,11 @@ ul.no-dots {
   margin-bottom: 40px; }
 
 .book__cover {
-  width: 50vmin;
   position: relative;
   margin: 0 auto; }
+  @media (min-width: 768px) {
+    .book__cover {
+      width: 50vmin; } }
   .book__cover > img {
     object-fit: cover; }
 
