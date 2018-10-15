@@ -6420,16 +6420,20 @@ label.panel-block {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
 
+html {
+  font-size: 14px; }
+
 body {
   background-image: url("../images/lost_art_bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: linear-gradient(45deg, #b92b27, #1565C0);
   min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: 16px; }
+  font-size: remsize(14);
+  overflow-x: hidden; }
+  @media (min-width: 768px) {
+    body {
+      font-size: remsize(16); } }
 
 .header {
   padding: 5vmin 1rem;
@@ -6441,8 +6445,15 @@ body {
 
 .page-content {
   max-width: 780px;
-  width: 100%;
-  margin: 0 auto; }
+  margin: 0 15px;
+  width: auto; }
+  @media (min-width: 620px) {
+    .page-content {
+      margin: 0 40px; } }
+  @media (min-width: 992px) {
+    .page-content {
+      margin: 0 auto;
+      width: 100%; } }
 
 .page {
   background: #fff;
@@ -6457,7 +6468,7 @@ body {
     margin-bottom: 20px;
     font-size: 1.375rem;
     line-height: 1.25; }
-    .page p::first-letter {
+    .page p:not(.has-text-centered)::first-letter {
       margin-left: 30px; }
     .page p.chapter__first-p::first-letter {
       font-size: 210%;
@@ -6480,6 +6491,12 @@ body {
     margin-left: 40px; }
   .page blockquote > p::first-letter {
     margin-left: 0; }
+  .page .chapter__title {
+    font-size: 2.625rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.125; }
   .page .chapter__subtitle {
     font-size: 2.125rem;
     font-weight: 700;
@@ -6522,6 +6539,15 @@ ul.no-dots {
   .page--cover h3 {
     margin-top: 120px; }
 
+.book-intro:not(.copy), .book-intro:not(.has-text-centered) > p {
+  text-align: justify; }
+
+.book-intro p::first-letter {
+  margin-left: 0 !important; }
+
+.book-intro blockquote {
+  margin-left: 0; }
+
 .home__cta {
   margin-bottom: 40px; }
 
@@ -6531,3 +6557,9 @@ ul.no-dots {
   margin: 0 auto; }
   .book__cover > img {
     object-fit: cover; }
+
+header h1.title {
+  color: #ffe867; }
+
+.has-small-caps {
+  font-variant: small-caps; }

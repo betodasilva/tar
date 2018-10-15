@@ -6,7 +6,7 @@ layout: default
     {{ content }}
 </div>
 
-<div class="book__pagination columns">
+<div class="book__pagination columns is-mobile">
         {% capture previousurl %} {{ page.previous.url }} {% endcapture %}
         {% capture nexturl %} {{ page.next.url }} {% endcapture %}
     <div class="column">

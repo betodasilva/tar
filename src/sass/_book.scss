@@ -12,8 +12,8 @@
         margin-bottom: 20px;
         font-size: remsize(22);
         line-height: 1.25;
-        &::first-letter {
-            :not(.has-text-centered) & { margin-left: 30px; }
+        &:not(.has-text-centered)::first-letter {
+            margin-left: 30px;
         }
 
         &.chapter__first-p::first-letter {
@@ -43,6 +43,14 @@
     blockquote {
         &:not(.has-text-centered) { margin-left: 40px; }
         > p::first-letter { margin-left: 0; }
+    }
+
+    .chapter__title {
+        font-size: remsize(42);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 1.125;
     }
 
     .chapter__subtitle {
@@ -108,5 +116,20 @@ ul.no-dots {
 
     h3 {
         margin-top: 120px;
+    }
+}
+
+.book-intro {
+
+    &:not(.copy), &:not(.has-text-centered) > p {
+       text-align: justify;
+    }
+
+    p::first-letter {
+        margin-left: 0 !important;
+    }
+
+    blockquote {
+        margin-left: 0;
     }
 }
