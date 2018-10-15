@@ -2,7 +2,9 @@ const gulp = require('gulp'),
       sass = require('gulp-sass'),
       babel = require('gulp-babel'),
       browserSync = require('browser-sync').create(),
-      shell = require('gulp-shell');
+      shell = require('gulp-shell'),
+      browserify = require('browserify'),
+      fs = require('fs');
 
 
 
@@ -15,11 +17,10 @@ gulp.task('sass', () =>
 );
 
 gulp.task('babel', () => 
-    gulp.src('src/js/app.js')
-    .pipe(babel({
-        presets: ['@babel/env']
-    }))
-    .pipe(gulp.dest('dist/js'))
+    browserify('src/js/app.js')
+    .transform('babelify', { presets: ['@babel/env']})
+    .bundle()
+    .pipe( fs.createWriteStream('dist/js/app.js') )
 );
 
 gulp.task('build', shell.task(['bundle exec jekyll build --watch']) );
