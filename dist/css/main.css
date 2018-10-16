@@ -6446,18 +6446,23 @@ body {
 .page-content {
   max-width: 780px;
   margin: 0 15px;
-  width: auto; }
+  width: auto;
+  padding-bottom: 30px; }
   @media (min-width: 620px) {
     .page-content {
       margin: 0 40px; } }
   @media (min-width: 992px) {
     .page-content {
       margin: 0 auto;
-      width: 100%; } }
+      width: 100%;
+      padding-bottom: 80px; } }
 
 @media (max-width: 568px) {
   .field.is-grouped.is-grouped-centered {
     flex-direction: column; } }
+
+.is-margin-centered {
+  margin: 0 auto; }
 
 .page {
   background: #fff;
@@ -6551,6 +6556,11 @@ ul.no-dots {
 
 .book-intro blockquote {
   margin-left: 0; }
+
+.footer__link {
+  margin-top: 20px; }
+  .footer__link a {
+    text-decoration: underline; }
 
 .home__cta {
   margin-bottom: 40px; }
