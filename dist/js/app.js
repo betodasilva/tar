@@ -3799,6 +3799,8 @@ function () {
   }, {
     key: "checkUserRegistered",
     value: function checkUserRegistered() {
+      if (window.location.pathname !== '/') return;
+
       if (_cookie.default.hasItem('userRegistered')) {
         this.dom.form.style.display = "none";
         this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading.";

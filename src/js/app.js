@@ -19,6 +19,8 @@ class Controller {
     }
 
     checkUserRegistered(){
+        if ( window.location.pathname !== '/') return;
+        
         if ( cookie.hasItem('userRegistered') ) {
             this.dom.form.style.display = "none";
             this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading."
