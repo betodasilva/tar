@@ -3763,6 +3763,8 @@ if (typeof window !== 'undefined' && window.Sweetalert2){  window.Sweetalert2.ve
 
 var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 
+var _cookie = _interopRequireDefault(require("./cookie"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3778,32 +3780,76 @@ function () {
     _classCallCheck(this, Controller);
 
     this.dom = {
-      form: document.querySelector('form#register')
+      form: document.querySelector('form#register'),
+      ctaText: document.querySelector('.home__cta .subtitle')
     };
     this.setEvents();
+    this.checkUserRegistered();
   }
 
   _createClass(Controller, [{
     key: "setEvents",
     value: function setEvents() {
       if (this.dom.form) {
-        console.log('Event added for form');
         this.dom.form.addEventListener('submit', this.submitForm.bind(this));
       }
 
       ;
     }
   }, {
+    key: "checkUserRegistered",
+    value: function checkUserRegistered() {
+      if (_cookie.default.hasItem('userRegistered')) {
+        this.dom.form.style.display = "none";
+        this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading.";
+        var button = document.createElement('button');
+        button.classList.add('button', 'is-info', 'is-inverted', 'is-margin-centered', 'is-block');
+        button.innerText = 'Start reading';
+        this.dom.ctaText.insertAdjacentElement('afterend', button);
+        button.addEventListener('click', function (event) {
+          event.stopPropagation();
+          window.location.href = "/book/page-01";
+        });
+      }
+    }
+  }, {
     key: "submitForm",
     value: function submitForm(event) {
       event.preventDefault();
       var form = event.target;
-      var data = new FormData(form);
-      (0, _sweetalert.default)({
-        type: "success",
-        titleText: "Thank you for being interested. Click OK to start reading",
-        onClose: function onClose() {
-          window.location.href = "/book/page-01";
+      var user = {
+        name: form.querySelector('input[name="name"]').value,
+        email: form.querySelector('input[name="email"]').value
+      };
+      this.storeUser(user).then(function (message) {
+        (0, _sweetalert.default)({
+          type: "success",
+          titleText: message,
+          onClose: function onClose() {
+            window.location.href = "/book/page-01";
+          }
+        });
+      }).catch(function (err) {
+        (0, _sweetalert.default)({
+          type: "error",
+          titleText: err
+        });
+      });
+    }
+  }, {
+    key: "storeUser",
+    value: function storeUser(user) {
+      return new Promise(function (resolve, reject) {
+        if (user.name && user.email) {
+          //cookie.setItem();
+          var date = new Date();
+          date.setDate(date.getDate() + 7);
+
+          _cookie.default.setItem('userRegistered', user, date);
+
+          resolve("Thank you for being interested. Click on the button to start reading.");
+        } else {
+          reject("Sorry for that, but something went wrong.");
         }
       });
     }
@@ -3822,4 +3868,109 @@ var Page = function Page() {
 
 var controller = new Controller();
 
-},{"sweetalert2":1}]},{},[2]);
+},{"./cookie":3,"sweetalert2":1}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/*\
+|*|
+|*|  :: cookies.js ::
+|*|
+|*|  A complete cookies reader/writer framework with full unicode support.
+|*|
+|*|  Revision #3 - July 13th, 2017
+|*|
+|*|  https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+|*|  https://developer.mozilla.org/User:fusionchess
+|*|  https://github.com/madmurphy/cookies.js
+|*|
+|*|  This framework is released under the GNU Public License, version 3 or later.
+|*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+|*|
+|*|  Syntaxes:
+|*|
+|*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+|*|  * docCookies.getItem(name)
+|*|  * docCookies.removeItem(name[, path[, domain]])
+|*|  * docCookies.hasItem(name)
+|*|  * docCookies.keys()
+|*|
+\*/
+var cookie = {
+  getItem: function getItem(sKey) {
+    if (!sKey) {
+      return null;
+    }
+
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  },
+  setItem: function setItem(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+      return false;
+    }
+
+    var sExpires = "";
+
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          /*
+          Note: Despite officially defined in RFC 6265, the use of `max-age` is not compatible with any
+          version of Internet Explorer, Edge and some mobile browsers. Therefore passing a number to
+          the end parameter might not work as expected. A possible solution might be to convert the the
+          relative time to an absolute time. For instance, replacing the previous line with:
+          */
+
+          /*
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; expires=" + (new Date(vEnd * 1e3 + Date.now())).toUTCString();
+          */
+
+          break;
+
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+
+        case Date:
+          sExpires = "; expires=" + vEnd.toUTCString();
+          break;
+      }
+    }
+
+    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    return true;
+  },
+  removeItem: function removeItem(sKey, sPath, sDomain) {
+    if (!this.hasItem(sKey)) {
+      return false;
+    }
+
+    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+    return true;
+  },
+  hasItem: function hasItem(sKey) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+      return false;
+    }
+
+    return new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=").test(document.cookie);
+  },
+  keys: function keys() {
+    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+
+    for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
+      aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
+    }
+
+    return aKeys;
+  }
+};
+var _default = cookie;
+exports.default = _default;
+
+},{}]},{},[2]);
