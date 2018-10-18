@@ -3849,7 +3849,7 @@ function () {
 
           _cookie.default.setItem('userRegistered', user, date);
 
-          resolve("Thank you for being interested. Click on the button to start reading.");
+          resolve("Thank you, you can now read The Lost Art of Relationship for Free");
         } else {
           reject("Sorry for that, but something went wrong.");
         }
