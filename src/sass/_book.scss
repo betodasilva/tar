@@ -46,8 +46,9 @@
     }
 
     .chapter__title {
-        font-size: remsize(42);
-        font-weight: 700;
+        font-size: remsize(72);
+        line-height: 1.125;
+        font-weight: 600;
         text-align: center;
         margin-bottom: 20px;
         line-height: 1.125;
@@ -139,5 +140,15 @@ ul.no-dots {
 
     a {
         text-decoration: underline;
+    }
+}
+
+ol {
+    padding-left: 30px;
+    
+    > li {
+        font-size: remsize(22);
+        line-height: 1.125;
+        margin-bottom: 10px;
     }
 }
