@@ -20,3 +20,8 @@
 header h1.title {
     color: #ffe867;
 }
+
+input.input::placeholder { color: #444; }
+input.input::-moz-placeholder { color: #444; }
+input.input::-webkit-input-placeholder { color: #444; }
+input.input:-ms-input-placeholder { color: #444; }
