@@ -3780,7 +3780,7 @@ function () {
     _classCallCheck(this, Controller);
 
     this.dom = {
-      form: document.querySelector('form#register'),
+      form: document.querySelector('form#mc-embedded-subscribe-form'),
       ctaText: document.querySelector('.home__cta .subtitle')
     };
     this.setEvents();
@@ -3805,7 +3805,7 @@ function () {
         this.dom.form.style.display = "none";
         this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading.";
         var button = document.createElement('button');
-        button.classList.add('button', 'is-info', 'is-inverted', 'is-margin-centered', 'is-block');
+        button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
         button.innerText = 'Start reading';
         this.dom.ctaText.insertAdjacentElement('afterend', button);
         button.addEventListener('click', function (event) {
@@ -3819,18 +3819,22 @@ function () {
     value: function submitForm(event) {
       event.preventDefault();
       var form = event.target;
+      var url = form.getAttribute('action');
       var user = {
-        name: form.querySelector('input[name="name"]').value,
-        email: form.querySelector('input[name="email"]').value
+        FNAME: form.querySelector('input[name="FNAME"]').value,
+        EMAIL: form.querySelector('input[name="EMAIL"]').value
       };
-      this.storeUser(user).then(function (message) {
+
+      if (!(user.EMAIL && user.FNAME)) {
         (0, _sweetalert.default)({
-          type: "success",
-          titleText: message,
-          onClose: function onClose() {
-            window.location.href = "/book/page-01";
-          }
+          type: "error",
+          titleText: "Please, check the fields and try again"
         });
+        return;
+      }
+
+      this.subscribeUser(user).then(function (message) {
+        form.submit();
       }).catch(function (err) {
         (0, _sweetalert.default)({
           type: "error",
@@ -3839,22 +3843,25 @@ function () {
       });
     }
   }, {
-    key: "storeUser",
-    value: function storeUser(user) {
+    key: "subscribeUser",
+    value: function subscribeUser(user) {
       return new Promise(function (resolve, reject) {
-        if (user.name && user.email) {
-          //cookie.setItem();
+        if (user.FNAME && user.EMAIL) {
           var date = new Date();
           date.setDate(date.getDate() + 7);
 
           _cookie.default.setItem('userRegistered', user, date);
 
           resolve("Thank you, you can now read The Lost Art of Relationship for Free");
+          return;
         } else {
           reject("Sorry for that, but something went wrong.");
         }
       });
     }
+  }, {
+    key: "showError",
+    value: function showError(message) {}
   }]);
 
   return Controller;
@@ -3869,6 +3876,20 @@ var Page = function Page() {
 };
 
 var controller = new Controller();
+document.addEventListener('DOMContentLoaded', function () {
+  var url = new URL(window.location.href);
+  var subs = url.searchParams.get('subs');
+
+  if (subs == 'success') {
+    (0, _sweetalert.default)({
+      type: "success",
+      titleText: "Thank you, you can now read The Lost Art of Relationship for Free",
+      onClose: function onClose() {
+        window.location.href = "/book/page-01";
+      }
+    });
+  }
+});
 
 },{"./cookie":3,"sweetalert2":1}],3:[function(require,module,exports){
 "use strict";

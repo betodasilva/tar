@@ -4,7 +4,7 @@ import cookie from './cookie';
 class Controller {
     constructor(){
         this.dom = {
-            form: document.querySelector('form#register'),
+            form: document.querySelector('form#mc-embedded-subscribe-form'),
             ctaText: document.querySelector('.home__cta .subtitle')
         }
 
@@ -25,12 +25,11 @@ class Controller {
             this.dom.form.style.display = "none";
             this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading."
             let button = document.createElement('button');
-            button.classList.add('button', 'is-info', 'is-inverted', 'is-margin-centered', 'is-block');
+            button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
             button.innerText = 'Start reading';
             this.dom.ctaText.insertAdjacentElement('afterend', button);
             button.addEventListener('click', function(event){
                 event.stopPropagation();
-
                 window.location.href="/book/page-01";
             });
         }
@@ -39,18 +38,24 @@ class Controller {
     submitForm( event ){
         event.preventDefault();
         let form = event.target;
+        let url = form.getAttribute('action');
         let user = {
-            name: form.querySelector('input[name="name"]').value,
-            email: form.querySelector('input[name="email"]').value,
+            FNAME: form.querySelector('input[name="FNAME"]').value,
+            EMAIL: form.querySelector('input[name="EMAIL"]').value,
         };
-        this.storeUser( user ).then( message => {
+
+        if ( !(user.EMAIL && user.FNAME) ) {
             swal({
-                type: "success",
-                titleText: message,
-                onClose: () => {
-                    window.location.href="/book/page-01";
-                }
+                type: "error",
+                titleText: "Please, check the fields and try again"
             });
+            return;
+        }
+
+       
+
+        this.subscribeUser( user ).then( message => {
+            form.submit();
         }).catch( err => {
             swal({
                 type: "error",
@@ -59,18 +64,27 @@ class Controller {
         });
     }
 
-    storeUser( user ) {
+    subscribeUser( user ) {
+        
         return new Promise( (resolve, reject) => {
-            if ( user.name && user.email ) {
-                //cookie.setItem();
+            if ( user.FNAME && user.EMAIL ) {
+
                 let date = new Date();
                 date.setDate( date.getDate() + 7);
                 cookie.setItem('userRegistered', user, date);
                 resolve("Thank you, you can now read The Lost Art of Relationship for Free");
+                return;
+                
             } else {
                 reject("Sorry for that, but something went wrong.");
             }
         });
+    }
+
+    showError( message ) {
+        
+
+        
     }
 }
 
@@ -85,3 +99,18 @@ class Page {
 }
 
 const controller = new Controller();
+
+document.addEventListener('DOMContentLoaded', function(){
+    const url = new URL( window.location.href );
+    let subs = url.searchParams.get('subs');
+    if ( subs == 'success' ) {
+        swal({
+            type: "success",
+            titleText: "Thank you, you can now read The Lost Art of Relationship for Free",
+            onClose: () => {
+                window.location.href="/book/page-01";
+            }
+        })
+    }
+
+});
