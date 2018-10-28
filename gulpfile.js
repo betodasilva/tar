@@ -11,7 +11,7 @@ const gulp = require('gulp'),
 
 gulp.task('sass', () => 
     gulp.src('src/sass/**/*.scss')
-    .pipe( sass().on('error', sass.logError) )
+    .pipe( sass({outputStyle: 'compressed'}).on('error', sass.logError) )
     .pipe(gulp.dest('dist/css'))
     .pipe( browserSync.stream() )
 );
