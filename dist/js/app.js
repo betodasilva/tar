@@ -3867,15 +3867,45 @@ function () {
   return Controller;
 }();
 
-var Page = function Page() {
-  _classCallCheck(this, Page);
+var Page =
+/*#__PURE__*/
+function () {
+  function Page() {
+    _classCallCheck(this, Page);
 
-  this.dom = {
-    page: document.querySelector('.page')
-  };
-};
+    this.dom = {
+      page: document.querySelector('.page'),
+      select: document.querySelector('.navigation select')
+    };
+    this.init();
+  }
+
+  _createClass(Page, [{
+    key: "init",
+    value: function init() {
+      if (!(window.location.href.indexOf('book') > -1)) return;
+      this.setEvent();
+    }
+  }, {
+    key: "setEvent",
+    value: function setEvent() {
+      console.log('Event init');
+      this.dom.select.addEventListener('change', this.navigateToSection.bind(this));
+    }
+  }, {
+    key: "navigateToSection",
+    value: function navigateToSection(event) {
+      var val = event.target.value;
+      console.log(val);
+      window.location.href = val;
+    }
+  }]);
+
+  return Page;
+}();
 
 var controller = new Controller();
+var page = new Page();
 document.addEventListener('DOMContentLoaded', function () {
   var url = new URL(window.location.href);
   var subs = url.searchParams.get('subs');

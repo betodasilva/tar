@@ -92,13 +92,34 @@ class Page {
     constructor(){
         this.dom = {
             page: document.querySelector('.page'),
+            select: document.querySelector('.navigation select')
         }
+
+        this.init();
+    }
+
+    init() {
+        if ( !(window.location.href.indexOf('book') > -1) ) return;
+        
+        this.setEvent();
+    }
+
+    setEvent() {
+        console.log('Event init');
+        this.dom.select.addEventListener('change', this.navigateToSection.bind(this))
+    }
+
+    navigateToSection(event){
+        const val = event.target.value;
+        console.log( val );
+        window.location.href = val;
     }
 
 
 }
 
 const controller = new Controller();
+const page = new Page();
 
 document.addEventListener('DOMContentLoaded', function(){
     const url = new URL( window.location.href );

@@ -2,6 +2,20 @@
 layout: default
 ---
 
+<div class="navigation">
+    <p>Jump to section</p>
+    <div class="select">
+        <select id="chapter__select">
+            <option value="" disabled selected>Choose a section</option>
+            {% for page in site.posts reversed %}
+                {% if page.ischapter %}
+                    <option value="{{ page.url }}">{{ page.title }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
 <div class="page">
     {{ content }}
 </div>
