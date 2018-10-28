@@ -3915,7 +3915,7 @@ document.addEventListener('DOMContentLoaded', function () {
       type: "success",
       titleText: "Thank you, you can now read The Lost Art of Relationship for Free",
       onClose: function onClose() {
-        window.location.href = "/book/page-01";
+        window.location.href = "/book/page-17";
       }
     });
   }
