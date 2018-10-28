@@ -30,7 +30,7 @@ class Controller {
             this.dom.ctaText.insertAdjacentElement('afterend', button);
             button.addEventListener('click', function(event){
                 event.stopPropagation();
-                window.location.href="/book/page-01";
+                window.location.href="/book/page-17";
             });
         }
     }
