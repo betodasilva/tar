@@ -4,7 +4,10 @@ const gulp = require('gulp'),
       browserSync = require('browser-sync').create(),
       shell = require('gulp-shell'),
       browserify = require('browserify'),
-      fs = require('fs');
+      fs = require('fs'),
+      uglify = require('gulp-uglify'),
+      source = require('vinyl-source-stream'),
+      buffer = require('vinyl-buffer');
 
 
 
@@ -22,6 +25,16 @@ gulp.task('babel', () =>
     .bundle()
     .pipe( fs.createWriteStream('dist/js/app.js') )
 );
+
+gulp.task('babel-build', () => {
+    browserify('src/js/app.js')
+    .transform('babelify', { presets: ['@babel/env']})
+    .bundle()
+    .pipe(source('app.min.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'))
+})
 
 gulp.task('build', shell.task(['bundle exec jekyll build --watch']) );
 

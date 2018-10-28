@@ -18,7 +18,10 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-sass": "^4.0.1",
-    "gulp-shell": "^0.6.5"
+    "gulp-shell": "^0.6.5",
+    "gulp-uglify": "^3.0.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
     "bulma": "^0.7.1",
