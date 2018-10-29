@@ -3784,7 +3784,7 @@ function () {
       ctaText: document.querySelector('.home__cta .subtitle')
     };
     this.setEvents();
-    this.checkUserRegistered();
+    if (this.checkUserRegistered()) this.displayReadingButton();
   }
 
   _createClass(Controller, [{
@@ -3799,20 +3799,21 @@ function () {
   }, {
     key: "checkUserRegistered",
     value: function checkUserRegistered() {
-      if (window.location.pathname !== '/') return;
-
-      if (_cookie.default.hasItem('userRegistered')) {
-        this.dom.form.style.display = "none";
-        this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading.";
-        var button = document.createElement('button');
-        button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
-        button.innerText = 'Start reading';
-        this.dom.ctaText.insertAdjacentElement('afterend', button);
-        button.addEventListener('click', function (event) {
-          event.stopPropagation();
-          window.location.href = "/book/page-17";
-        });
-      }
+      return _cookie.default.hasItem('userRegistered');
+    }
+  }, {
+    key: "displayReadingButton",
+    value: function displayReadingButton() {
+      this.dom.form.style.display = "none";
+      this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading.";
+      var button = document.createElement('button');
+      button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
+      button.innerText = 'Start reading';
+      this.dom.ctaText.insertAdjacentElement('afterend', button);
+      button.addEventListener('click', function (event) {
+        event.stopPropagation();
+        window.location.href = "/book/page-17";
+      });
     }
   }, {
     key: "submitForm",
@@ -3918,6 +3919,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = "/book/page-17";
       }
     });
+  }
+
+  if (window.location.href.indexOf('book') > -1 && !controller.checkUserRegistered()) {
+    window.location.href = "/";
   }
 });
 

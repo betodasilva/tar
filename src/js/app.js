@@ -9,7 +9,7 @@ class Controller {
         }
 
         this.setEvents();
-        this.checkUserRegistered();
+        if ( this.checkUserRegistered() ) this.displayReadingButton();
     }
 
     setEvents(){
@@ -19,20 +19,20 @@ class Controller {
     }
 
     checkUserRegistered(){
-        if ( window.location.pathname !== '/') return;
-        
-        if ( cookie.hasItem('userRegistered') ) {
-            this.dom.form.style.display = "none";
-            this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading."
-            let button = document.createElement('button');
-            button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
-            button.innerText = 'Start reading';
-            this.dom.ctaText.insertAdjacentElement('afterend', button);
-            button.addEventListener('click', function(event){
-                event.stopPropagation();
-                window.location.href="/book/page-17";
-            });
-        }
+        return cookie.hasItem('userRegistered');
+    }
+
+    displayReadingButton(){
+        this.dom.form.style.display = "none";
+        this.dom.ctaText.innerText = "Looks like you already entered your email. Click the button to start reading."
+        let button = document.createElement('button');
+        button.classList.add('button', 'is-info', 'is-medium', 'is-margin-centered', 'is-block');
+        button.innerText = 'Start reading';
+        this.dom.ctaText.insertAdjacentElement('afterend', button);
+        button.addEventListener('click', function(event){
+            event.stopPropagation();
+            window.location.href="/book/page-17";
+        });
     }
 
     submitForm( event ){
@@ -132,6 +132,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 window.location.href="/book/page-17";
             }
         })
+    }
+
+    if ( ( window.location.href.indexOf('book') > -1) && !controller.checkUserRegistered() ) {
+        window.location.href="/";
     }
 
 });
