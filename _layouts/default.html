@@ -27,6 +27,9 @@
       })(); </script>
   </body>
   <script type="application/ld+json">
+  {% if page.layout != "home" %}
+    {% assign description = page.content | strip_html %}
+  {% endif %}
     {
       "@context": "http://schema.org",
       "@type": "NewsArticle",
@@ -34,7 +37,7 @@
         "@type": "WebPage",
         "@id": "https://google.com/article"
       },
-      "headline": {% if page.title %}{{ site.title - page.title }}{% else %}{{ site.title }}{% endif %},
+      "headline": {% if page.title %}{{ site.title }} - {{ page.title }}{% else %}{{ site.title }}{% endif %},
       "image": [
         "../src/images/book_cover.jpg"
        ],
@@ -42,7 +45,7 @@
         "@type": "Person",
         "name": "Dan Chrystal"
       },
-      "description": {% if page.excerpt %} {{ site.description }} {{ page.excerpt }} {% else %} {{ site.description }} {% endif %}
+      "description": {{ site.description }} {% if description %} {{ description | truncatewords: 60 | strip }} {% endif %}
     }
     </script>    
 </html>
