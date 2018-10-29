@@ -26,5 +26,23 @@
         s.parentNode.insertBefore(wf, s);
       })(); </script>
   </body>
-
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://google.com/article"
+      },
+      "headline": {% if page.title %}{{ site.title - page.title }}{% else %}{{ site.title }}{% endif %},
+      "image": [
+        "../src/images/book_cover.jpg"
+       ],
+      "author": {
+        "@type": "Person",
+        "name": "Dan Chrystal"
+      },
+      "description": {% if page.excerpt %} {{ site.description }} {{ page.excerpt }} {% else %} {{ site.description }} {% endif %}
+    }
+    </script>    
 </html>
