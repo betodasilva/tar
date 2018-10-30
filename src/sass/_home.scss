@@ -21,6 +21,20 @@ header h1.title {
     color: #ffe867;
 }
 
+@media (max-width: 568px) {
+    .mc-field-group.control {
+        margin-bottom: 6px !important;
+
+        ~.clear {
+            display: flex;
+            justify-content: center;
+            > input[type="submit"] {
+                width: 140px;
+            }
+        }
+    }
+}
+
 input.input::placeholder { color: #444; }
 input.input::-moz-placeholder { color: #444; }
 input.input::-webkit-input-placeholder { color: #444; }
